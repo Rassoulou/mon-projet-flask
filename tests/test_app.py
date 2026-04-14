@@ -48,3 +48,14 @@ def test_about(client):
     response = client.get("/about")
     assert response.status_code == 200
     assert response.get_json()["version"] == "1.0"
+
+
+@pytest.mark.parametrize("a,b,expected", [
+    (1, 2, 3),
+    (10, 5, 15),
+    (0, 0, 0),
+    (100, 200, 300),
+])
+def test_add_parametrize(client, a, b, expected):
+    response = client.get(f"/add/{a}/{b}")
+    assert response.get_json()["result"] == expected
