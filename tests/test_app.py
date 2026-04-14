@@ -42,3 +42,9 @@ def test_add(client):
 def test_add_zero(client):
     response = client.get("/add/0/1")
     assert response.get_json()["result"] == 1
+
+
+def test_about(client):
+    response = client.get("/about")
+    assert response.status_code == 200
+    assert response.get_json()["version"] == "1.0"
